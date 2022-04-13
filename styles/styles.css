@@ -532,12 +532,12 @@ nav {
   
   @media (min-width: 600px) {
     
-    picture {
+    /* picture {
       display: none;
-    }
+    } */
     
     video {
-      display: block;
+      display: none;
     }
 
     .text-wrapper > h1{
