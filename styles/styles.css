@@ -12,7 +12,7 @@ video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: none;
+  display: block;
 }
 
 /* .hero-video {
@@ -430,9 +430,10 @@ nav {
     color: lightslategrey;
 
   }
-  section {
+  .contact > section {
     margin: 0 1rem;
     max-width: 30rem;
+    align-self: center;
   }
 
   .c-header {
@@ -532,13 +533,13 @@ nav {
   
   @media (min-width: 600px) {
     
-    /* picture {
-      display: none;
-    } */
-    
-    video {
+    picture {
       display: none;
     }
+    
+    /* video {
+      display: none;
+    } */
 
     .text-wrapper > h1{
       color: fff;
@@ -561,7 +562,7 @@ nav {
     .hero {
         margin-bottom: 0;
       }
-    
+
     .main-menu .menu-icon {
       display: none;
     }
