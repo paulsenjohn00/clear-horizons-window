@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--
+    Johnny Paulsen
+    IS 120 
+    HTML Semantic Mark-up
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clear Horizon is a company based in 
+    Utah that is dedicated keeping your windows clean.">
+    <title>Clear Horizon Window Cleaning</title>
+    <!--Normalized CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/styles.css">
+
+
+</head>
+
+<body class="home">
+    <div class="main-menu">
+        <div class="menu-icon">
+            <svg viewbox="0 0 60 60" width="60px" height="60px">
+                <line x1="5%" y1="50%" x2="95%" y2="50%" />
+                <line x1="5%" y1="50%" x2="95%" y2="50%" />
+            </svg>
+        </div>
+
+        <nav>
+            <ul>
+                <li class="translate"><a href="#">Home</a></li>
+                <li class="translate"><a href="./about/">About</a></li>
+                <li class="translate"><a href="./contact/">Contact</a></li>
+                <li class="translate"><a href="./form/">Form</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--Here are the changing images or HERO image.-->
+    <div class="hero">
+        <!-- <video loop ></video> -->
+        <picture>
+            <source srcset="images/hero-1600w.jpg" media="(min-width: 901px)">
+            <source srcset="images/hero-900w.jpg" media="(min-width: 501px)">
+            <source srcset="images/hero-500w.jpg" media="(max-width: 500px)">
+
+            <img src="images/hero-900w.jpg" alt="Image of an open window">
+
+        </picture>
+        <div class="text-wrapper">
+            <h1>Clear Horizon Window Cleaning</h1>
+            <p>One stop solution to all your window needs!</p>
+        </div>
+    </div>
+
+    <main>
+        <article class="container">
+            <div class="panel">
+                <div class="text-content left">
+                    <h2>Our Mission:</h2>
+                    <p>
+                        At Clear Horizon, we are the one-stop solution to all of your exterior and
+                        interior window cleaning needs. We offer services that exceed our customers’
+                        expectations at a reasonable price.
+                    </p>
+                    <a href="#" class="button">Free Quote</a>
+                </div>
+                <div class="image-wrapper">
+                    <img src="images/clearHorizonLogo.PNG" alt="company Logo">
+                </div>
+            </div>
+        </article>
+        <article>
+            <h2>Our Services:</h2>
+            <!--Ordered List-->
+            <div class="cards">
+                <div class="card">
+                    <a>
+                        <div class="image-wrapper">
+                            <img src="images/window-washing1.jpg" alt="Picture many employee's">
+                        </div>
+                        <p>
+                            Employee's
+                        </p>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a>
+                        <div class="image-wrapper">
+                            <img src="images/widow-washing2.jpg" alt="picture of window cleaner">
+                        </div>
+                        <p>
+                            Projects
+                        </p>
+                    </a>
+                </div>
+
+
+                <div class="card">
+                    <a>
+                        <div class="image-wrapper">
+                            <img src="images/ladder.jpg" alt="washer on ladder">
+                        </div>
+                        <p>
+                            FAQ'S
+                        </p>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <a>
+                        <div class="image-wrapper">
+                            <img src="images/contact-card.jpg" alt="picture of telephone">
+                        </div>
+                        <p>
+                            Contact Us
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+        </article>
+
+    </main>
+    <aside>
+        <p>
+            Clear Horizon is dedicated to customer satisfaction
+        </p>
+    </aside>
+    <article>
+        <div class="panel">
+            <div class="text-content">
+                <h2>About Us</h2>
+                <p>The concept of Clear Horizon started with a simple motive of helping the residents of the Utah and
+                    Salt Lake Valleys with their commercial and residential window cleaning needs. We felt that people
+                    needed a full-service window cleaning firm that could provide them premium quality services at an
+                    affordable price. We are committed towards providing our clients with a professional window cleaning
+                    experience that is always more than what they had expected.</p>
+                <a class="button" href="#">Learn More</a>
+            </div>
+            <div class="image-wrapper left">
+                <img src="images/window-aside.png" alt="Two images of window washers overlayed">
+            </div>
+        </div>
+    </article>
+    <!--External link included in the footer-->
+    <footer>
+        <!-- <p>Clear Horizon is a Utah Valley-based interior and exterior window cleaning firm that provides quality and
+            affordable window cleaning solutions.
+        </p> -->
+        <p>One stop solution to all your window needs</p>
+    </footer>
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            document.querySelector(".menu-icon").addEventListener("click", () => {
+                document.querySelector(".main-menu").classList.toggle("menu-show");
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <!--Normalized CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body>
+    <div class="main-menu">
+        <div class="menu-icon">
+            <svg viewbox="0 0 60 60" width="60px" height="60px">
+                <line x1="5%" y1="50%" x2="95%" y2="50%" />
+                <line x1="5%" y1="50%" x2="95%" y2="50%" />
+            </svg>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about/index.html">About</a></li>
+                <li><a href="../contact/index.html">Contact</a></li>
+                <li><a href="../form/index.html">Form</a></li>
+            </ul>
+        </nav>
+    </div>
+    <header>
+        <div class="c-header">
+            <h1>Contact</h1>
+        </div>
+    </header>
+    <section>
+        <form name="contact-us" nameaction="">
+            <img src="../images/clearHorizonLogo.PNG" alt="company Logo">
+            <input type="text" name="full-name" id="full-name" placeholder="Full Name*">
+            <input type="email" name="email" id="email" placeholder="Email*">
+            <input type="tel" name="phone" id="phone" placeholder="Phone Number*">
+
+            <p class="question">What services would you like to purchase? (Check all that apply)</p>
+
+            <fieldset>
+                <input type="checkbox" id="interior" name="services" value="interior">
+                <label for="interior">Interior</label>
+
+                <input type="checkbox" id="exterior" name="services" value="exterior">
+                <label for="exterior">Exterior</label>
+
+                <input type="checkbox" id="screen" name="services" value="screen">
+                <label for="screen">Screen-Cleaning</label>
+
+                <input type="checkbox" id="hard-water" name="services" value="hard-water">
+                <label for="hard-water">Hard-Water</label>
+            </fieldset>
+            <fieldset>
+                <legend>Customer Type</legend>
+                <label for="customerStyle"></label>
+                <select name="customerStyle" id="customerStyle">
+                    <option value="new">New Customer</option>
+                    <option value="old">Old Customer</option>
+                </select>
+            </fieldset>
+
+            <div class="text-area">
+                <textarea name="message" id="message" class="form-control rounded border-white mb-3 form-text-area"
+                    rows="5" cols="30" placeholder="Anthing else you would like us to know..." required></textarea>
+            </div>
+
+            <div class="form-button">
+                <button onclick="changeBackground()"> Submit </button>
+            </div>
+        </form>
+    </section>
+
+    <script>
+        // enter the URL for your Google Sheet 
+        const scriptURL =
+            'https://script.google.com/macros/s/AKfycbwDshfhEh12wdTGhOsmXej2oPFHWJ8cm_Km4joT--bHbmCHQNtYEFxkveRO2yNQmoU_AA/exec'
+
+        // add a name attribute to your <form> and enter its value here 
+        const form = document.forms['Clear Horizons project']
+
+        // enter the value of your checkboxes' name attribute
+        const checkboxName = "attributes"
+
+        // set these to your loader and message classes
+        const loading = document.querySelector('.loading')
+        const successMessage = document.querySelector('.success-message')
+        const errorMessage = document.querySelector('.error-message')
+
+        // this will run when the submit button is clicked
+        form.addEventListener('submit', event => {
+            // stops default form handling so we can submit it to Google Sheets instead
+            event.preventDefault()
+
+            // show the loader and hide form
+            form.classList.add('hidden')
+            loading.classList.remove('hidden')
+
+            // collect the form values into an object that can be sent to Google Sheets
+            let fd = new FormData(form);
+
+            /* If more than one checkbox is selected, the form will have multiple keys 
+               (checkbox name). Only the first checkbox value would be entered into 
+               Google Sheets. 
+               To get around this, concat all the selected checkbox values into a single 
+               string and send that value */
+
+            // grab all the selected values stored as key/value pairs of checkboxName/value
+            let checkBoxValues = fd.getAll(checkboxName)
+
+            // then delete them from the formData object
+            fd.delete(checkboxName);
+
+            // create a string
+            let text = ""
+            if (checkBoxValues.length <= 2) {
+                text = checkBoxValues.join(" and ")
+            } else {
+                let end = checkBoxValues.pop();
+                text = checkBoxValues.join(", ");
+                text += ", and " + end;
+            }
+            // add the key/value pair checkboxName/text back to the formData object
+            fd.append(checkboxName, text);
+
+            // use an asynchronous request to POST your formData object to your Google Sheet
+            fetch(scriptURL, {
+                    method: 'POST',
+                    body: fd,
+                })
+                // if response ok, show success message and hide loader, else display error
+                .then(response => {
+                    loading.classList.add('hidden')
+                    if (response.ok) {
+                        console.log('Success!', response)
+                        successMessage.classList.remove('hidden')
+                    } else {
+                        console.log(
+                            "Something has gone terribly wrong and I'm rather afraid I don't know what to do.",
+                            response)
+                        errorMessage.classList.remove('hidden')
+                    }
+                })
+                // if error, show error message and hide loader
+                .catch(error => {
+                    console.error('Error!', error.message)
+                    errorMessage.classList.remove('hidden')
+                    loading.classList.add('hidden')
+                })
+        })
+
+
+
+        window.addEventListener("DOMContentLoaded", () => {
+            document.querySelector(".menu-icon").addEventListener("click", () => {
+                document.querySelector(".main-menu").classList.toggle("menu-show");
+            });
+        });
+    </script>
+</body>
+
+</html>
